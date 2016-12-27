@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.openGL.csdn.view.CoverFlowOpenGL;
 import com.openGL.csdn.view.CubeView;
+import com.openGL.csdn.view.DiceSurfaceView;
 import com.openGL.csdn.view.EarthView;
 import com.openGL.csdn.view.TextView;
 
@@ -29,7 +30,7 @@ public class MainActivity01 extends Activity {
 	private Handler mHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			Toast.makeText(MainActivity01.this, (String) msg.obj, 1000);
+			//Toast.makeText(MainActivity01.this, (String) msg.obj, 1000);
 		}
 	};
 	@Override
@@ -37,7 +38,7 @@ public class MainActivity01 extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);//隐藏标题栏
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);//隐藏状态栏
-		CoverFlowOpenGL baseGL=new CoverFlowOpenGL(this);
+		/*CoverFlowOpenGL baseGL=new CoverFlowOpenGL(this);
 		//baseGL.setText("我们都是中国人");
 		baseGL.setCoverFlowListener(new CoverFlowOpenGL.CoverFlowListener() {
 			@Override
@@ -64,7 +65,9 @@ public class MainActivity01 extends Activity {
 		});
 
 		//mCoverFlow.setSelection(0);
-		baseGL.setBackgroundTexture(R.drawable.bg);
+		baseGL.setBackgroundTexture(R.drawable.bg);*/
+
+		DiceSurfaceView baseGL=new DiceSurfaceView(this);
 		setContentView(baseGL);
 
 	}
