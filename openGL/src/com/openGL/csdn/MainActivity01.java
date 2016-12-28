@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ import com.openGL.csdn.view.CoverFlowOpenGL;
 import com.openGL.csdn.view.CubeView;
 import com.openGL.csdn.view.DiceSurfaceView;
 import com.openGL.csdn.view.EarthView;
+import com.openGL.csdn.view.LuckyPanView;
 import com.openGL.csdn.view.TextView;
 
 public class MainActivity01 extends Activity {
@@ -67,7 +69,29 @@ public class MainActivity01 extends Activity {
 		//mCoverFlow.setSelection(0);
 		baseGL.setBackgroundTexture(R.drawable.bg);*/
 
-		DiceSurfaceView baseGL=new DiceSurfaceView(this);
+		//DiceSurfaceView baseGL=new DiceSurfaceView(this);
+
+		final  LuckyPanView baseGL=new LuckyPanView(this);
+		baseGL.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				if (!baseGL.isStart())
+				{
+					//mStartBtn.setImageResource(R.drawable.stop);
+					baseGL.luckyStart(1);
+				} else
+				{
+					if (!baseGL.isShouldEnd())
+
+					{
+						//mStartBtn.setImageResource(R.drawable.start);
+						baseGL.luckyEnd();
+					}
+				}
+			}
+		});
 		setContentView(baseGL);
 
 	}

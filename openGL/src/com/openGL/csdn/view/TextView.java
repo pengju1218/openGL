@@ -175,4 +175,5 @@ public class TextView extends BaseGL implements GLSurfaceView.Renderer {
         //绘制字体
         canvas.drawText(font, 0, 20, p);
     }
+    
 }
