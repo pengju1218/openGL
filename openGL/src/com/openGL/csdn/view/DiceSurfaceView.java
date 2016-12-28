@@ -44,13 +44,6 @@ public  class DiceSurfaceView extends  BaseGL{
 	private float axisY = 0;
 	private RotateTask rTask = null;
 
-
-
-
-
-
-
-
 	public DiceSurfaceView(Context context) {
 		super(context);
 		// 设置渲染器，

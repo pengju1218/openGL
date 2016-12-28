@@ -15,8 +15,10 @@ import com.openGL.csdn.view.CoverFlowOpenGL;
 import com.openGL.csdn.view.CubeView;
 import com.openGL.csdn.view.DiceSurfaceView;
 import com.openGL.csdn.view.EarthView;
+import com.openGL.csdn.view.GLImageView;
 import com.openGL.csdn.view.LuckyPanView;
 import com.openGL.csdn.view.TextView;
+import com.openGL.csdn.view.TriangleView;
 
 public class MainActivity01 extends Activity {
 	private static int[] SAMPLE_IMAGES = new int[] {
@@ -70,7 +72,7 @@ public class MainActivity01 extends Activity {
 		baseGL.setBackgroundTexture(R.drawable.bg);*/
 
 		//DiceSurfaceView baseGL=new DiceSurfaceView(this);
-
+/*
 		final  LuckyPanView baseGL=new LuckyPanView(this);
 		baseGL.setOnClickListener(new View.OnClickListener()
 		{
@@ -91,7 +93,11 @@ public class MainActivity01 extends Activity {
 					}
 				}
 			}
-		});
+		});*/
+
+
+
+		GLImageView baseGL=new GLImageView(this);
 		setContentView(baseGL);
 
 	}
