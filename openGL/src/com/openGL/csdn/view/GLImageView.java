@@ -23,19 +23,6 @@ import javax.microedition.khronos.opengles.GL10;
 public class GLImageView extends BaseGL {
 
 
-    FloatBuffer vertices;
-    FloatBuffer texture;
-    ShortBuffer indices;
-    int textureId;
-    private   float[] GVertices = new float[]{
-            0f, 0f, 0f,
-            480, 0f, 0f,
-            160f, 480f, 0f,
-            0f, 0f, 0f
-
-
-    };
-
     public GLImageView(Context context) {
         super(context);
     }
@@ -44,55 +31,52 @@ public class GLImageView extends BaseGL {
         super(context, attrs);
     }
 
+
+
+
+    FloatBuffer vertices;
+    FloatBuffer texture;
+    ShortBuffer indices;
+    int textureId;
+    private float[] GVertices1 = new float[]{-240, -400.0f,
+            240, -400.0f,
+            -240, 400.0f,
+            240, 400.0f};
+
+    private float[] GVertices2 = new float[]{0.0f, 0.0f,
+            480.0f, 0.0f,
+            0.0f, 800.0f,
+            480.0f, 800.0f};
+
+
+
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         Log.d("GLSurfaceViewTest", "surface created");
 
-      ByteBuffer byteBuffer = ByteBuffer.allocateDirect(4 * 3 * 4);
+        ByteBuffer byteBuffer = ByteBuffer.allocateDirect(4 * 3 * 4);
         byteBuffer.order(ByteOrder.nativeOrder());
         vertices = byteBuffer.asFloatBuffer();
-//            vertices.put( new float[] {  -80f,   -120f,0,1f,
-//                                         80f,  -120f, 1f,1f,
-//                                         -80f, 120f, 0f,0f,
-//                                         80f,120f,   1f,0f});
-        vertices.put(GVertices);
+
+        vertices.put(GVertices2);
+
 
         ByteBuffer indicesBuffer = ByteBuffer.allocateDirect(6 * 2);
         indicesBuffer.order(ByteOrder.nativeOrder());
         indices = indicesBuffer.asShortBuffer();
-        indices.put(new short[] { 0, 1, 2,1,2,3});
+        indices.put(new short[]{0, 1, 2, 1, 2, 3});
 
-        ByteBuffer textureBuffer = ByteBuffer.allocateDirect(4 * 2 * 4);
+        ByteBuffer textureBuffer = ByteBuffer.allocateDirect(4 * 3 * 4);
         textureBuffer.order(ByteOrder.nativeOrder());
         texture = textureBuffer.asFloatBuffer();
-        texture.put( new float[] { 0,1f,
-                1f,1f,
-                0f,0f,
-                1f,0f});
+        texture.put(new float[]{0, 1f,
+                1f, 1f,
+                0f, 0f,
+                1f, 0f});
 
         indices.position(0);
         vertices.position(0);
         texture.position(0);
-/*
-        ByteBuffer byteBuffer = ByteBuffer.allocateDirect(6 * 2 * 4);
-        byteBuffer.order(ByteOrder.nativeOrder());
-        FloatBuffer vertices = byteBuffer.asFloatBuffer();
-        // 定义两个三角形的六个顶点
-        vertices.put(new float[]{
-                -240.0f, 750.0f,
-                478.0f, 750.0f,
-                478.0f, 10.0f,
-                -240.0f, 750.0f,
-                478.0f, 10.0f,
-                -240.0f, 10.0f
-        });
-        vertices.flip();
-
-        gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
-        gl.glVertexPointer(2, GL10.GL_FLOAT, 0, vertices);
-        gl.glDrawArrays(GL10.GL_TRIANGLES, 0, 3);
-        gl.glDrawArrays(GL10.GL_TRIANGLES, 3, 3);*/
-
     }
 
     @Override
@@ -105,15 +89,15 @@ public class GLImageView extends BaseGL {
 
     @Override
     public void onDrawFrame(GL10 gl) {
-        gl.glViewport(0, 0, 480, 800);
-        textureId = loadTexture("ie.jpg",gl);
+        gl.glViewport(0, 0, GLImageView.this.getWidth(), GLImageView.this.getHeight());
+        textureId = loadTexture("ls.jpg", gl);
         //定义显示在屏幕上的什么位置(opengl 自动转换)
-       // gl.glViewport(0, 0, GLImageView.this.getWidth(), GLImageView.this.getHeight());
+        // gl.glViewport(0, 0, GLImageView.this.getWidth(), GLImageView.this.getHeight());
         gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
         gl.glMatrixMode(GL10.GL_PROJECTION);
         gl.glLoadIdentity();
-        //gl.glOrthof(-160, 160, -240, 240, 1, -1);
-        gl.glOrthof(0, 480, 0, 800, 1, -1);
+        //gl.glOrthof(-240, 240, -400, 400, 1, -1);
+        gl.glOrthof(0, 480, 0, 800, 0, 1);
         gl.glEnable(GL10.GL_TEXTURE_2D);
         //绑定纹理ID
         gl.glBindTexture(GL10.GL_TEXTURE_2D, textureId);
@@ -129,7 +113,7 @@ public class GLImageView extends BaseGL {
                 GL10.GL_UNSIGNED_SHORT, indices);
     }
 
-    public int loadTexture(String fileName,GL10 gl) {
+    public int loadTexture(String fileName, GL10 gl) {
         try {
             Bitmap bitmap = BitmapFactory.decodeStream(getContext().getAssets().open(
                     fileName));

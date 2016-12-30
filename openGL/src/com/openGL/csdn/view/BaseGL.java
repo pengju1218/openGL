@@ -60,8 +60,5 @@ public class BaseGL extends GLSurfaceView implements GLSurfaceView.Renderer {
       // GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
     }
 
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-    }
+
 }

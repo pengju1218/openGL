@@ -2,10 +2,12 @@ package com.openGL.csdn.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+import java.nio.ShortBuffer;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -17,6 +19,18 @@ import javax.microedition.khronos.opengles.GL10;
 public class TriangleView extends BaseGL {
 
 
+    public TriangleView(Context context) {
+        super(context);
+
+    }
+
+    public TriangleView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+
+    }
+
+
+    /*第一种写法
     private float[] mTriangleArray = {
             0f, 1f, 0f,
             -1f, -1f, 0f,
@@ -31,16 +45,6 @@ public class TriangleView extends BaseGL {
     private FloatBuffer mTriangleBuffer;
     private FloatBuffer mColorBuffer;
 
-
-    public TriangleView(Context context) {
-        super(context);
-
-    }
-
-    public TriangleView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-
-    }
 
     @Override
     public void init() {
@@ -129,5 +133,65 @@ public class TriangleView extends BaseGL {
         mColorBuffer.put(mColor);
         mColorBuffer.position(0);
 
+    }*/
+
+
+    FloatBuffer vertices;
+    ShortBuffer indices;
+
+
+    @Override
+    public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+        Log.d("GLSurfaceViewTest", "surface created");
+
+        ByteBuffer byteBuffer = ByteBuffer.allocateDirect(3 * 3 * 4);
+        byteBuffer.order(ByteOrder.nativeOrder());
+        vertices = byteBuffer.asFloatBuffer();
+/*        vertices.put(new float[]{0f, 0f, 0f,
+                320f, 0f, 0f,
+                160f, 480f, 0f});*/
+
+        vertices.put(new float[]{-160f, -240f, 0f,
+                160f, -240f, 0f,
+                0f, 240.0f ,0f});
+/*
+        vertices.put( new float[] { -160f, -240f,
+                160f, -240f,
+                0f, 240.0f});*/
+        ByteBuffer indicesBuffer = ByteBuffer.allocateDirect(3 * 2);
+        indicesBuffer.order(ByteOrder.nativeOrder());
+        indices = indicesBuffer.asShortBuffer();
+        indices.put(new short[]{0, 1, 2});
+        //indices.flip() == indices.position(0)
+        indices.flip();
+        vertices.flip();
     }
+
+    @Override
+    public void onSurfaceChanged(GL10 gl, int width, int height) {
+        Log.d("GLSurfaceViewTest", "surface changed: " + width + "x"
+                + height);
+    }
+
+    @Override
+    public void onDrawFrame(GL10 gl) {
+        //定义显示在屏幕上的什么位置(opengl 自动转换)
+        gl.glViewport(0, 0, TriangleView.this.getWidth(), TriangleView.this.getHeight());
+        // gl.glViewport(50, 50,430, 550);
+        gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+        gl.glMatrixMode(GL10.GL_PROJECTION);
+        gl.glLoadIdentity();
+        //设置视锥体的大小，一个很扁的长方体
+        //gl.glOrthof(0, 320, 0, 480, 0, 1);//  left, right bottom top zNear zFar
+          gl.glOrthof(-160, 160, -240, 240, 1, -1);
+        //颜色设置为红色
+        gl.glColor4f(1, 0, 0, 1);
+        gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
+        gl.glVertexPointer(3, GL10.GL_FLOAT, 0, vertices);
+        //画出这个三角形
+        gl.glDrawElements(GL10.GL_TRIANGLE_STRIP, 3,
+                GL10.GL_UNSIGNED_SHORT, indices);
+    }
+
+
 }
