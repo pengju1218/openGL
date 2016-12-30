@@ -47,12 +47,14 @@ public class LineView extends BaseGL {
         gl.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT, GL10.GL_NICEST);
 
     }
+
     @Override
     public void onDrawFrame(GL10 gl) {
 
         DrawScene(gl);
 
     }
+
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
         // Sets the current view port to the new size.
@@ -79,8 +81,11 @@ public class LineView extends BaseGL {
     // 画线的坐标
     float vertexArray2[] = {
             -1.01f, -1.6f, 0.0f,
-            1.01f, -1.6f, 0.0f,
-           };
+            0f, -1.6f, 0.0f,
+    };
+
+
+
 
     // 画线
     public void DrawScene(GL10 gl) {
@@ -93,28 +98,12 @@ public class LineView extends BaseGL {
 
         gl.glLoadIdentity();
         gl.glTranslatef(0, 0, -4);
-
+        gl.glLineWidth(3);
         gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
 
         gl.glVertexPointer(3, GL10.GL_FLOAT, 0, vertex);
         gl.glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
-        gl.glDrawArrays(GL10.GL_LINES, 0, 2);
-       /* int index = new Random().nextInt(4);
-        switch (index) {
-
-            case 1:
-                gl.glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
-                gl.glDrawArrays(GL10.GL_LINES, 0, 4);
-                break;
-            case 2:
-                gl.glColor4f(0.0f, 1.0f, 0.0f, 1.0f);
-                gl.glDrawArrays(GL10.GL_LINE_STRIP, 0, 4);
-                break;
-            case 3:
-                gl.glColor4f(0.0f, 0.0f, 1.0f, 1.0f);
-                gl.glDrawArrays(GL10.GL_LINE_LOOP, 0, 4);
-                break;
-        }*/
+        gl.glDrawArrays(GL10.GL_LINES, 0, 4);
 
         gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
 

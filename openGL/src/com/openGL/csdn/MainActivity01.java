@@ -14,6 +14,7 @@ import com.openGL.csdn.view.GLCanvas;
 import com.openGL.csdn.view.GLImageView;
 import com.openGL.csdn.view.LineView;
 import com.openGL.csdn.view.OvalView;
+import com.openGL.csdn.view.Process;
 import com.openGL.csdn.view.RectView;
 import com.openGL.csdn.view.TextView1;
 import com.openGL.csdn.view.TriangleView;
@@ -121,10 +122,15 @@ public class MainActivity01 extends Activity {
             }
         });
         baseGL.setSelection(0);*/
-        String s = " 一个朋友跟我说，在感情里，信“总是深情留不住，偏偏套路得人心”的人，认为现在的痴情不值钱，是一种很白痴的表现，“认真了，就等于输了”，有技巧的撩妹子才是恋爱中的精髓，要懂得拿捏的准度，在这过程中，要知道你所“追求”的是什么。“追求”的时候要怎么说甜言蜜语，做事的时候该怎么有男人的霸道，吵架的时候要用什么方式去哄对方。";
+     /*   String s = " 一个朋友跟我说，在感情里，信“总是深情留不住，偏偏套路得人心”的人，认为现在的痴情不值钱，是一种很白痴的表现，“认真了，就等于输了”，有技巧的撩妹子才是恋爱中的精髓，要懂得拿捏的准度，在这过程中，要知道你所“追求”的是什么。“追求”的时候要怎么说甜言蜜语，做事的时候该怎么有男人的霸道，吵架的时候要用什么方式去哄对方。";
 
         AlignTextView baseGL=new AlignTextView(this);
         baseGL.setText(s);
+*/
+        LineView baseGL=new LineView(this);
+     //   baseGL.setText(s);
+
+
         setContentView(baseGL);
 
     }

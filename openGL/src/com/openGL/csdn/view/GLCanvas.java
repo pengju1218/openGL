@@ -104,7 +104,7 @@ public abstract class GLCanvas extends BaseGL {
         Paint p = new Paint();
 
 
-        onDrawCanvas(canvas, p);
+        onDrawCanvas(canvas);
 
         // 到这里为止，所需Bitmap构建完成
 
@@ -129,7 +129,7 @@ public abstract class GLCanvas extends BaseGL {
     }
 
 
-    public abstract void onDrawCanvas(Canvas canvas, Paint p);
+    public abstract void onDrawCanvas(Canvas canvas);
 
 
     @Override

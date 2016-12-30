@@ -37,7 +37,7 @@ public class TextView1 extends GLCanvas {
 
 
     @Override
-    public void onDrawCanvas(Canvas canvas, Paint p) {
+    public void onDrawCanvas(Canvas canvas) {
 
 
         String s = " 一个朋友跟我说，在感情里，信“总是深情留不住，偏偏套路得人心”的人，认为现在的痴情不值钱，是一种很白痴的表现，“认真了，就等于输了”，有技巧的撩妹子才是恋爱中的精髓，要懂得拿捏的准度，在这过程中，要知道你所“追求”的是什么。“追求”的时候要怎么说甜言蜜语，做事的时候该怎么有男人的霸道，吵架的时候要用什么方式去哄对方。";
